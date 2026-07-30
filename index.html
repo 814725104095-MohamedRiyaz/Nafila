@@ -1,158 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPL Live Scoreboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Scoreboard - Data Structure</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="container">
 
-<header>
+    <h1>🏏 Cricket Live Scoreboard</h1>
 
-<h1>🏏 IPL LIVE SCOREBOARD</h1>
+    <div class="score-card">
 
-<p>Professional Cricket Scoring System</p>
+        <h2>INDIA</h2>
 
-</header>
+        <h1>
+            <span id="score">0</span>/<span id="wicket">0</span>
+        </h1>
 
-<div class="scorecard">
+        <p>Overs : <span id="overs">0.0</span></p>
 
-<div class="team-name">
-🇮🇳 INDIA
-</div>
-
-<div class="score">
-
-<span id="score">0</span>
-
-/
-
-<span id="wicket">0</span>
-
-</div>
-
-<div class="overs">
-
-Overs :
-<span id="overs">0.0</span>
-
-</div>
-
-<div class="runrate">
-
-Run Rate :
-<span id="rr">0.00</span>
-
-</div>
-
-</div>
-
-<div class="batsmen">
-
-<div class="player">
-
-⭐ <span id="striker">Rohit</span>
-
-<h3>
-
-Runs :
-<span id="strikerRuns">0</span>
-
-</h3>
-
-</div>
-
-<div class="player">
-
-<span id="nonStriker">Gill</span>
-
-<h3>
-
-Runs :
-<span id="nonRuns">0</span>
-
-</h3>
-
-</div>
-
-</div>
-
-<h2>Players</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Player</th>
-
-<th>Runs</th>
-
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody id="players">
-
-</tbody>
-
-</table>
-
-<h2>Ball History</h2>
-
-<div id="history" class="history">
-
--
-
-</div>
-
-<h2>Score Buttons</h2>
-
-<div class="buttons">
-
-<button onclick="addRun(0)">0</button>
-
-<button onclick="addRun(1)">1</button>
-
-<button onclick="addRun(2)">2</button>
-
-<button onclick="addRun(3)">3</button>
-
-<button onclick="addRun(4)">4️⃣</button>
-
-<button onclick="addRun(6)">6️⃣</button>
-
-<button class="wide" onclick="wide()">WD</button>
-
-<button class="noball" onclick="noBall()">NB</button>
-
-<button class="wicket" onclick="wicket()">W</button>
-
-<button class="reset" onclick="resetMatch()">RESET</button>
-
-</div>
-
-<footer>
-
-Made with ❤️ using HTML CSS JavaScript
-
-</footer>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+        <p>Run Rate : <span id="rr">>
