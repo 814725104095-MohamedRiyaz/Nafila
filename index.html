@@ -1,29 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Scoreboard - Data Structure</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Cricket Scoreboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-    <h1>🏏 Cricket Live Scoreboard</h1>
+<h1>🏏 Cricket Scoreboard</h1>
 
-    <div class="score-card">
+<div class="scoreBox">
+<h2 id="score">0/0</h2>
+<p id="overs">Overs : 0.0</p>
+</div>
 
-        <h2>INDIA</h2>
+<table>
+<tr>
+<th>Player</th>
+<th>Runs</th>
+<th>Balls</th>
+</tr>
 
-        <h1>
-            <span id="score">0</span>/<span id="wicket">0</span>
-        </h1>
+<tbody id="players"></tbody>
 
-        <p>Overs : <span id="overs">0.0</span></p>
+</table>
 
-        <p>Run Rate : <span id="rr">>
+<h3>Add Score</h3>
+
+<div class="buttons">
+
+<button onclick="addRun(0)">0</button>
+<button onclick="addRun(1)">1</button>
+<button onclick="addRun(2)">2</button>
+<button onclick="addRun(3)">3</button>
+<button onclick="addRun(4)">4</button>
+<button onclick="addRun(6)">6</button>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="wide()">Wide</button>
+<button onclick="noBall()">No Ball</button>
+<button onclick="wicket()">Wicket</button>
+<button onclick="undo()">Undo</button>
+
+</div>
+
+<h3>Ball History (Linked List)</h3>
+
+<ul id="history"></ul>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
