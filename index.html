@@ -3,46 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricket Scoreboard</title>
+<title>Cricket Live Scoreboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-<h1>🏏 Cricket Scoreboard</h1>
+<h1>🏏 LIVE CRICKET SCOREBOARD</h1>
 
-<div class="score">
-<h2>Total Score</h2>
-<h3 id="totalScore">0</h3>
-</div>
+<div class="scorecard">
 
-<div class="controls">
-<input type="number" id="runs" min="0" max="6" placeholder="Enter Runs (0-6)">
-<button onclick="addBall()">Add Ball</button>
-</div>
-
-<h2>Players</h2>
-
-<table>
-<thead>
-<tr>
-<th>Player</th>
-<th>Runs</th>
-</tr>
-</thead>
-<tbody id="playersTable"></tbody>
-</table>
-
-<h2>Ball History</h2>
-
-<div id="history" class="history">
-No Balls Yet
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+<div class="team">
+<h2>INDIA</h2>
+<h1><span id="score">0</span>/<span id="wickets">0</span></h1>
+<h3>Overs : <span id="overs">0.0</span></h
