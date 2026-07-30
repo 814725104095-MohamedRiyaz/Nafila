@@ -1,211 +1,205 @@
-// ---------- Players (Array) ----------
+// ARRAY (Players)
 
 let players = [
-    { name: "Rohit", runs: 0 },
-    { name: "Gill", runs: 0 },
-    { name: "Virat", runs: 0 },
-    { name: "Rahul", runs: 0 },
-    { name: "Hardik", runs: 0 }
+
+{name:"Rohit",runs:0,balls:0},
+{name:"Gill",runs:0,balls:0},
+{name:"Virat",runs:0,balls:0},
+{name:"KL Rahul",runs:0,balls:0},
+{name:"Hardik",runs:0,balls:0}
+
 ];
 
-// ---------- Linked List ----------
+let striker=0;
 
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
+let total=0;
+
+let wickets=0;
+
+let balls=0;
+
+let stack=[];
+
+
+// LINKED LIST
+
+class Node{
+
+constructor(data){
+
+this.data=data;
+this.next=null;
+
 }
 
-let head = null;
-
-function addHistory(data) {
-
-    let newNode = new Node(data);
-
-    if (head == null) {
-        head = newNode;
-    } else {
-
-        let temp = head;
-
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-
-        temp.next = newNode;
-    }
 }
 
-function showHistory() {
+class LinkedList{
 
-    let temp = head;
-    let output = "";
+constructor(){
 
-    while (temp != null) {
-        output += temp.data + " ";
-        temp = temp.next;
-    }
+this.head=null;
 
-    document.getElementById("history").innerHTML =
-        output === "" ? "No Balls Yet" : output;
 }
 
-// ---------- Match Variables ----------
+insert(data){
 
-let score = 0;
-let wickets = 0;
-let balls = 0;
+let node=new Node(data);
 
-let striker = 0;
-let nonStriker = 1;
+if(this.head==null){
 
-// ---------- Update UI ----------
+this.head=node;
 
-function updateUI() {
+return;
 
-    document.getElementById("score").innerHTML = score;
-    document.getElementById("wicket").innerHTML = wickets;
-
-    document.getElementById("overs").innerHTML =
-        Math.floor(balls / 6) + "." + (balls % 6);
-
-    let over = balls / 6;
-
-    let rr = over == 0 ? 0 : (score / over).toFixed(2);
-
-    document.getElementById("rr").innerHTML = rr;
-
-    document.getElementById("striker").innerHTML =
-        players[striker].name;
-
-    document.getElementById("strikerRuns").innerHTML =
-        players[striker].runs;
-
-    document.getElementById("nonStriker").innerHTML =
-        players[nonStriker].name;
-
-    document.getElementById("nonRuns").innerHTML =
-        players[nonStriker].runs;
-
-    let table = "";
-
-    for (let i = 0; i < players.length; i++) {
-
-        let status = "";
-
-        if (i == striker)
-            status = "⭐ Striker";
-        else if (i == nonStriker)
-            status = "Non-Striker";
-
-        table += `
-        <tr>
-            <td>${players[i].name}</td>
-            <td>${players[i].runs}</td>
-            <td>${status}</td>
-        </tr>
-        `;
-    }
-
-    document.getElementById("players").innerHTML = table;
-
-    showHistory();
 }
 
-// ---------- Change Strike ----------
+let temp=this.head;
 
-function changeStrike() {
+while(temp.next!=null)
 
-    let temp = striker;
-    striker = nonStriker;
-    nonStriker = temp;
+temp=temp.next;
+
+temp.next=node;
+
 }
 
-// ---------- Run Button ----------
+display(){
 
-function addRun(run) {
+let temp=this.head;
 
-    score += run;
+let html="";
 
-    balls++;
+while(temp!=null){
 
-    players[striker].runs += run;
+html+="<li>"+temp.data+"</li>";
 
-    addHistory(run);
+temp=temp.next;
 
-    if (run % 2 == 1)
-        changeStrike();
-
-    if (balls % 6 == 0)
-        changeStrike();
-
-    updateUI();
 }
 
-// ---------- Wicket ----------
+document.getElementById("history").innerHTML=html;
 
-function wicket() {
-
-    wickets++;
-
-    balls++;
-
-    addHistory("W");
-
-    if (striker < players.length - 1) {
-        striker++;
-    }
-
-    updateUI();
 }
 
-// ---------- Wide ----------
-
-function wide() {
-
-    score++;
-
-    addHistory("WD");
-
-    updateUI();
 }
 
-// ---------- No Ball ----------
+let history=new LinkedList();
 
-function noBall() {
+displayPlayers();
 
-    score++;
+update();
 
-    addHistory("NB");
+function displayPlayers(){
 
-    updateUI();
+let html="";
+
+for(let p of players){
+
+html+=`
+
+<tr>
+
+<td>${p.name}</td>
+
+<td>${p.runs}</td>
+
+<td>${p.balls}</td>
+
+</tr>
+
+`;
+
 }
 
-// ---------- Reset ----------
+document.getElementById("players").innerHTML=html;
 
-function resetMatch() {
-
-    score = 0;
-    wickets = 0;
-    balls = 0;
-
-    striker = 0;
-    nonStriker = 1;
-
-    head = null;
-
-    players = [
-        { name: "Rohit", runs: 0 },
-        { name: "Gill", runs: 0 },
-        { name: "Virat", runs: 0 },
-        { name: "Rahul", runs: 0 },
-        { name: "Hardik", runs: 0 }
-    ];
-
-    updateUI();
 }
 
-// ---------- Start ----------
+function update(){
 
-updateUI();
+document.getElementById("score").innerHTML=
+
+total+"/"+wickets;
+
+let over=Math.floor(balls/6)+"."+(balls%6);
+
+document.getElementById("overs").innerHTML=
+
+"Overs : "+over;
+
+displayPlayers();
+
+history.display();
+
+}
+
+function addRun(run){
+
+players[striker].runs+=run;
+
+players[striker].balls++;
+
+total+=run;
+
+balls++;
+
+history.insert(run+" Run");
+
+stack.push(run);
+
+update();
+
+}
+
+function wicket(){
+
+players[striker].balls++;
+
+balls++;
+
+wickets++;
+
+history.insert("Wicket");
+
+stack.push("W");
+
+striker++;
+
+if(striker>=players.length)
+
+striker=players.length-1;
+
+update();
+
+}
+
+function wide(){
+
+total++;
+
+history.insert("Wide");
+
+stack.push("WD");
+
+update();
+
+}
+
+function noBall(){
+
+total++;
+
+history.insert("No Ball");
+
+stack.push("NB");
+
+update();
+
+}
+
+function undo(){
+
+alert("Undo feature can be added using Stack.");
+
+}
