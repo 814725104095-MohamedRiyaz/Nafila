@@ -1,94 +1,62 @@
-let team=[
+let score = 0;
+let wickets = 0;
+let balls = 0;
 
-{name:"Rohit",runs:0},
-{name:"Gill",runs:0},
-{name:"Virat",runs:0},
-{name:"Rahul",runs:0},
-{name:"Hardik",runs:0}
+let strikerIndex = 0;
+let nonStrikerIndex = 1;
 
+let players = [
+    { name: "Rohit", runs: 0 },
+    { name: "Gill", runs: 0 },
+    { name: "Virat", runs: 0 },
+    { name: "Rahul", runs: 0 },
+    { name: "Hardik", runs: 0 }
 ];
 
-let striker=0;
+let history = [];
 
-let total=0;
+function updateUI() {
 
-let wickets=0;
+    document.getElementById("score").innerText = score;
+    document.getElementById("wicket").innerText = wickets;
 
-let balls=0;
+    let overs = Math.floor(balls / 6) + "." + (balls % 6);
+    document.getElementById("overs").innerText = overs;
 
-let history=[];
+    let completedOvers = balls / 6;
+    let rr = completedOvers === 0 ? 0 : (score / completedOvers).toFixed(2);
+    document.getElementById("rr").innerText = rr;
 
-function update(){
+    document.getElementById("striker").innerText = players[strikerIndex].name;
+    document.getElementById("strikerRuns").innerText = players[strikerIndex].runs;
 
-document.getElementById("score").innerHTML=total;
+    document.getElementById("nonStriker").innerText = players[nonStrikerIndex].name;
+    document.getElementById("nonRuns").innerText = players[nonStrikerIndex].runs;
 
-document.getElementById("wickets").innerHTML=wickets;
+    let table = "";
 
-let over=Math.floor(balls/6)+"."+(balls%6);
+    for (let i = 0; i < players.length; i++) {
 
-document.getElementById("overs").innerHTML=over;
+        let status = "";
 
-let data="";
+        if (i === strikerIndex)
+            status = "⭐ Striker";
+        else if (i === nonStrikerIndex)
+            status = "Runner";
 
-for(let i=0;i<team.length;i++){
+        table += `
+        <tr>
+            <td>${players[i].name}</td>
+            <td>${players[i].runs}</td>
+            <td>${status}</td>
+        </tr>`;
+    }
 
-let status="";
+    document.getElementById("players").innerHTML = table;
 
-if(i==striker)
-status="🏏 Striker";
-
-data+=`
-
-<tr>
-
-<td>${team[i].name}</td>
-
-<td>${team[i].runs}</td>
-
-<td>${status}</td>
-
-</tr>
-
-`;
-
+    document.getElementById("history").innerHTML = history.join(" ");
 }
 
-document.getElementById("players").innerHTML=data;
-
-document.getElementById("history").innerHTML=history.join(" ");
-
-}
-
-function addBall(run){
-
-history.push(run);
-
-total+=run;
-
-team[striker].runs+=run;
-
-balls++;
-
-update();
-
-}
-
-function wicket(){
-
-history.push("W");
-
-wickets++;
-
-balls++;
-
-striker++;
-
-if(striker>=team.length)
-
-striker=team.length-1;
-
-update();
-
-}
-
-update();
+function changeStrike() {
+    let temp = strikerIndex;
+   
